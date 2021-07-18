@@ -9,7 +9,7 @@
     <androidx.cardview.widget.CardView
         android:layout_width="100dp"
         android:layout_height="100dp"
-        app:cardBackgroundColor="@color/brown"
+        app:cardBackgroundColor="#E1433232"
         app:cardCornerRadius="10dp"
         app:cardElevation="5dp"
         android:padding="5dp"
@@ -24,8 +24,8 @@
             <ImageView
                 android:id="@+id/category_img_dish"
                 android:src="@drawable/category_image"
-                android:layout_width="85dp"
-                android:layout_height="85dp"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
                 android:layout_marginTop="-15dp"
                 android:layout_marginRight="-15dp"
                 android:layout_alignParentEnd="true"
@@ -39,8 +39,9 @@
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentLeft="true"
                 android:textColor="@color/white"
+                android:maxLines="1"
                 android:padding="5dp"
-                android:textSize="18sp"
+                android:textSize="13sp"
                 android:fontFamily="@font/gilroy_bold"/>
 
         </RelativeLayout>
