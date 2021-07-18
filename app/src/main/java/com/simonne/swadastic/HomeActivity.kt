@@ -171,6 +171,8 @@ class HomeActivity : AppCompatActivity(), FeaturedRecipesClicked, MealCategoryCl
         bottomNavigation.setOnClickMenuListener {
             when(it.id){
                 1 -> {
+                    val intent = Intent(this, SearchActivity::class.java)
+                    startActivity(intent)
                 }
                 2 -> {
 

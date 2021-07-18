@@ -1,11 +1,9 @@
 package com.simonne.swadastic
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.android.volley.Request
@@ -16,6 +14,8 @@ import com.google.android.youtube.player.YouTubeBaseActivity
 import com.google.android.youtube.player.YouTubeInitializationResult
 import com.google.android.youtube.player.YouTubePlayer
 import com.google.android.youtube.player.YouTubePlayerView
+import java.util.regex.Matcher
+import java.util.regex.Pattern
 
 
 class RecipeActivity : YouTubeBaseActivity(), RecipesClicked {
@@ -35,8 +35,22 @@ class RecipeActivity : YouTubeBaseActivity(), RecipesClicked {
 
     }
 
+    fun getVideoId(videoUrl: String): String {
+        var videoId = ""
+        val regex =
+            "http(?:s)?:\\/\\/(?:m.)?(?:www\\.)?youtu(?:\\.be\\/|be\\.com\\/(?:watch\\?(?:feature=youtu.be\\&)?v=|v\\/|embed\\/|user\\/(?:[\\w#]+\\/)+))([^&#?\\n]+)"
+        val pattern: Pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE)
+        val matcher: Matcher = pattern.matcher(videoUrl)
+        if (matcher.find()) {
+            videoId = matcher.group(1)
+        }
+        return videoId
+    }
+
     private fun playVideo(videoURL: String){
         val youtubePlayer = findViewById<YouTubePlayerView>(R.id.youtubeVideo)
+
+        val videoID = getVideoId(videoURL)
 
         youtubePlayer.initialize(API_KEY, object : YouTubePlayer.OnInitializedListener{
             override fun onInitializationSuccess(
@@ -44,7 +58,7 @@ class RecipeActivity : YouTubeBaseActivity(), RecipesClicked {
                 player: YouTubePlayer?,
                 p2: Boolean
             ) {
-                player?.loadVideo("HzeK7g8cD0Y")
+                player?.loadVideo(videoID)
                 player?.play()
             }
 
