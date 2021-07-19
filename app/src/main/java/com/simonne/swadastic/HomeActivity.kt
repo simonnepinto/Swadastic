@@ -178,6 +178,8 @@ class HomeActivity : AppCompatActivity(), FeaturedRecipesClicked, MealCategoryCl
 
                 }
                 3 -> {
+                    val intent = Intent(this, IndianRecipesActivity::class.java)
+                    startActivity(intent)
                 }
             }
         }

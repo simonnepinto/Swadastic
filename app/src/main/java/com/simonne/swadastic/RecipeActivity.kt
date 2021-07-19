@@ -1,5 +1,6 @@
 package com.simonne.swadastic
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
@@ -22,6 +23,7 @@ class RecipeActivity : YouTubeBaseActivity(), RecipesClicked {
 
     private lateinit var mRecipesAdapter: RecipesAdapter
     val API_KEY = "AIzaSyAmLhOufpDy1TeiIEG68ZW6-ZIFm1Y2f3A"
+    lateinit var recipe_name: String; lateinit var youtube_link: String;
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,7 +37,7 @@ class RecipeActivity : YouTubeBaseActivity(), RecipesClicked {
 
     }
 
-    fun getVideoId(videoUrl: String): String {
+    private fun getVideoId(videoUrl: String): String {
         var videoId = ""
         val regex =
             "http(?:s)?:\\/\\/(?:m.)?(?:www\\.)?youtu(?:\\.be\\/|be\\.com\\/(?:watch\\?(?:feature=youtu.be\\&)?v=|v\\/|embed\\/|user\\/(?:[\\w#]+\\/)+))([^&#?\\n]+)"
@@ -110,6 +112,9 @@ class RecipeActivity : YouTubeBaseActivity(), RecipesClicked {
                 instructions.text = recipesObject.getString("strInstructions")
                 playVideo(recipesObject.getString("strYoutube"))
 
+                recipe_name =  recipesObject.getString("strMeal")
+                youtube_link = recipesObject.getString("strYoutube")
+
                 mRecipesAdapter.updateItems(recipesList)
             },
             Response.ErrorListener { error ->
@@ -125,7 +130,13 @@ class RecipeActivity : YouTubeBaseActivity(), RecipesClicked {
         finish()
     }
 
-    fun shareButtonFunction(view: View) {}
+    fun shareButtonFunction(view: View) {
+        val intent = Intent(Intent.ACTION_SEND)
+        intent.type = "text/plain"
+        val shareBody = "Check out this recipe for $recipe_name. Here is the YouTube Link: $youtube_link"
+        intent.putExtra(Intent.EXTRA_TEXT, shareBody)
+        startActivity(Intent.createChooser(intent, "Share using"))
+    }
 
     override fun onRecipeClicked(item: Recipes) {
 
