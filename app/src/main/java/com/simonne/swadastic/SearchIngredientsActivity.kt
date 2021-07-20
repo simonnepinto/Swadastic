@@ -2,8 +2,8 @@ package com.simonne.swadastic
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.SearchView
-import android.widget.TextView
+import android.view.View
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -13,19 +13,90 @@ import com.android.volley.toolbox.JsonObjectRequest
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation
 
 
-class SearchIngredientsActivity : AppCompatActivity(), SearchView.OnQueryTextListener, SearchIngredientsClicked {
+class SearchIngredientsActivity : AppCompatActivity(), SearchIngredientsClicked {
 
     private val url: String = "https://www.themealdb.com/api/json/v1/1/filter.php?i="
     private lateinit var mSearchIngredientsAdapter: SearchIngredientsAdapter
+    private lateinit var ingredientNames: ArrayList<String>
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search_ingredients)
 
         val searchView = findViewById<SearchView>(R.id.search_bar_ingredients)
-        searchView.setOnQueryTextListener(this)
+        val ingredientsList =  findViewById<ListView>(R.id.ingredientsList)
+        val ingredientsMainTitle = findViewById<TextView>(R.id.ingredientsMainTitle)
+
+        ingredientNames = getIngredients()
+
+        val ingredientsAdapter: ArrayAdapter<String> = ArrayAdapter(
+            this, android.R.layout.simple_list_item_1, ingredientNames
+        )
+
+        ingredientsList.adapter = ingredientsAdapter
+
+        ingredientsList.onItemClickListener = AdapterView.OnItemClickListener{
+                parent, view, position, id ->
+            searchView.setQuery(parent.getItemAtPosition(position).toString(), false)
+        }
+
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                searchView.clearFocus()
+                if(ingredientNames.contains(query)){
+                    ingredientsAdapter.filter.filter(query)
+                    ingredientsList.visibility = View.GONE
+
+                    ingredientsMainTitle.visibility = View.GONE
+
+                    if (query != null) {
+                        searchIngredientsData(query)
+                    }
+                }
+                else{
+                    ingredientsMainTitle.visibility = View.VISIBLE
+                    ingredientsMainTitle.text = "Sorry!! No results match your search"
+                }
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                ingredientsMainTitle.visibility = View.GONE
+
+                if(newText.isNullOrEmpty())
+                    ingredientsList.visibility = View.GONE
+                else
+                    ingredientsList.visibility = View.VISIBLE
+
+                ingredientsAdapter.filter.filter(newText)
+                return false
+            }
+        })
 
         bottomNavigation()
+    }
+
+    private fun getIngredients(): ArrayList<String> {
+        val ingredientsURL = "https://www.themealdb.com/api/json/v1/1/list.php?i=list"
+        val ingredientsNameList = ArrayList<String>()
+
+        val jsonObjectRequest = JsonObjectRequest(
+            Request.Method.GET, ingredientsURL, null,
+            Response.Listener {
+                val jsonArray = it.getJSONArray("meals")
+                for(i in 0 until jsonArray.length()){
+                    val ingredientsObject = jsonArray.getJSONObject(i)
+                    ingredientsNameList.add(ingredientsObject.getString("strIngredient"))
+                }
+            },
+            Response.ErrorListener {
+            }
+        )
+
+        // Add the request to the RequestQueue.
+        MySingleton.getInstance(this).addToRequestQueue(jsonObjectRequest)
+        return ingredientsNameList
     }
 
     private fun searchIngredientsData(query: String) {
@@ -63,34 +134,6 @@ class SearchIngredientsActivity : AppCompatActivity(), SearchView.OnQueryTextLis
         MySingleton.getInstance(this).addToRequestQueue(jsonObjectRequest)
     }
 
-    override fun onQueryTextSubmit(query: String): Boolean {
-        val ingredientsMainTitle = findViewById<TextView>(R.id.ingredientsMainTitle)
-        val recipeURL = url + query
-        var string = query
-        val jsonObjectRequest = JsonObjectRequest(
-            Request.Method.GET, recipeURL, null,
-            Response.Listener {
-                val jsonArray = it.getJSONArray("meals")
-                if(jsonArray == null){
-                    ingredientsMainTitle.text = "Sorry! Nothing matches your search"
-                    string = ""
-                }
-            },
-            Response.ErrorListener {
-            }
-        )
-
-        // Add the request to the RequestQueue.
-        MySingleton.getInstance(this).addToRequestQueue(jsonObjectRequest)
-
-        searchIngredientsData(string)
-        return false
-    }
-
-    override fun onQueryTextChange(newText: String?): Boolean {
-        return false
-    }
-
     private fun bottomNavigation() {
         val bottomNavigation = findViewById<MeowBottomNavigation>(R.id.bottomNavigation)
         bottomNavigation.add(MeowBottomNavigation.Model(1, R.drawable.ic_search))
@@ -119,5 +162,9 @@ class SearchIngredientsActivity : AppCompatActivity(), SearchView.OnQueryTextLis
         val intent = Intent(this, RecipeActivity::class.java)
         intent.putExtra("id", item.id)
         startActivity(intent)
+    }
+
+    fun backButtonFunction(view: View) {
+        finish()
     }
 }

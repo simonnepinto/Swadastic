@@ -4,36 +4,96 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.SearchView
-import android.widget.Toast
+import android.widget.*
 import androidx.cardview.widget.CardView
 import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation
+import java.util.*
+import kotlin.collections.ArrayList
 
-class SearchActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
+class SearchActivity : AppCompatActivity() {
+    lateinit var recipeNames: ArrayList<String>
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search)
 
         val searchView = findViewById<SearchView>(R.id.search_bar)
-        searchView.setOnQueryTextListener(this)
+        val recipeList = findViewById<ListView>(R.id.recipeList)
 
+        recipeNames = getRecipes()
 
+        val recipeAdapter: ArrayAdapter<String> = ArrayAdapter(
+            this, android.R.layout.simple_list_item_1, recipeNames
+        )
+
+        recipeList.adapter = recipeAdapter
+
+        recipeList.onItemClickListener = AdapterView.OnItemClickListener{
+            parent, view, position, id ->
+            searchView.setQuery(parent.getItemAtPosition(position).toString(), false)
+        }
+
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                searchView.clearFocus()
+                if(recipeNames.contains(query)){
+                    recipeAdapter.filter.filter(query)
+                    recipeList.visibility = View.GONE
+                    val url = "https://www.themealdb.com/api/json/v1/1/search.php?s=$query"
+                    callRecipeActivity(url)
+                }
+                else{
+                    Toast.makeText(this@SearchActivity, "Recipe Not Found", Toast.LENGTH_LONG).show()
+                }
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                if(newText.isNullOrEmpty())
+                    recipeList.visibility = View.GONE
+                else
+                    recipeList.visibility = View.VISIBLE
+
+                recipeAdapter.filter.filter(newText)
+                return false
+            }
+        })
         
         bottomNavigation()
+    }
+
+    private fun getRecipes(): ArrayList<String> {
+        val recipeNameList = ArrayList<String>()
+
+        val myArray = arrayOf("a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p",  "r", "s", "t", "v", "w", "y")
+
+        for (character in myArray) {
+            val recipeURL = "https://www.themealdb.com/api/json/v1/1/search.php?f=$character"
+            val jsonObjectRequest = JsonObjectRequest(
+                Request.Method.GET, recipeURL, null,
+                Response.Listener {
+                    val jsonArray = it.getJSONArray("meals")
+                    for(i in 0 until jsonArray.length()){
+                        val recipeObject = jsonArray.getJSONObject(i)
+                        recipeNameList.add(recipeObject .getString("strMeal"))
+                    }
+                },
+                Response.ErrorListener {
+                }
+            )
+
+            // Add the request to the RequestQueue.
+            MySingleton.getInstance(this).addToRequestQueue(jsonObjectRequest)
+        }
+        return recipeNameList
     }
 
     fun getRandomRecipe(view: View) {
         val url = "https://www.themealdb.com/api/json/v1/1/random.php"
         callRecipeActivity(url)
-    }
-
-    override fun onQueryTextSubmit(query: String): Boolean {
-        val query = "https://www.themealdb.com/api/json/v1/1/search.php?s=$query"
-        callRecipeActivity(query)
-        return false
     }
 
     private fun callRecipeActivity(url: String) {
@@ -54,10 +114,6 @@ class SearchActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
 
         // Add the request to the RequestQueue.
         MySingleton.getInstance(this).addToRequestQueue(jsonObjectRequest)
-    }
-
-    override fun onQueryTextChange(newText: String?): Boolean {
-        return false
     }
 
     private fun bottomNavigation() {
@@ -93,4 +149,5 @@ class SearchActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
         val intent = Intent(this, SearchAreaActivity::class.java)
         startActivity(intent)
     }
+
 }
