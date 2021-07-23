@@ -2,7 +2,7 @@
 
 <p align="center">
   <img src="https://forthebadge.com/images/badges/built-for-android.svg">
-  [![forthebadge](https://img.shields.io/badge/Kotlin-0095D5?&style=for-the-badge&logo=kotlin&logoColor=white)](#)
+  <img src="https://img.shields.io/badge/Kotlin-0095D5?&style=for-the-badge&logo=kotlin&logoColor=white">
 </p>
 
 
@@ -29,7 +29,6 @@ Recipes communicate the ingredients and procedures of making a dish, along with 
 
 ## Demo 🛠️
 
-<p align = "center"> 
-  https://user-images.githubusercontent.com/53074235/126778739-e5515604-d9e6-41a0-b6d9-34c3b61a59ce.mp4
-</p>
+https://user-images.githubusercontent.com/53074235/126778739-e5515604-d9e6-41a0-b6d9-34c3b61a59ce.mp4
+
 
