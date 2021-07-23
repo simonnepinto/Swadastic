@@ -1,7 +1,7 @@
 <h1 align="center">Swadastic : Recipe App </h1> 
 
 <p align="center">
-  <img src="https://forthebadge.com/images/badges/built-for-android.svg">
+  <img src="https://img.shields.io/badge/Android-3DDC84?style=for-the-badge&logo=android&logoColor=white">
   <img src="https://img.shields.io/badge/Kotlin-0095D5?&style=for-the-badge&logo=kotlin&logoColor=white">
 </p>
 
@@ -29,6 +29,6 @@ Recipes communicate the ingredients and procedures of making a dish, along with 
 
 ## Demo 🛠️
 
-https://user-images.githubusercontent.com/53074235/126778739-e5515604-d9e6-41a0-b6d9-34c3b61a59ce.mp4
+https://user-images.githubusercontent.com/53074235/126779469-7c866c50-1377-4d94-b255-3845e04fe680.mp4
 
 
