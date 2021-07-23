@@ -39,6 +39,8 @@ A recipe app catering to different cuisines and delicacies will enable various s
 
 
 <table align="center"><tr><td>
+  
 https://user-images.githubusercontent.com/53074235/126779469-7c866c50-1377-4d94-b255-3845e04fe680.mp4
+  
 </td></tr></table> 
 
