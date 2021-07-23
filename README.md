@@ -16,17 +16,18 @@ A recipe app catering to different cuisines and delicacies will enable various s
 
 ## Features :clipboard:
  
+ <pre>
  a) Display the dishes: <br />
-    &nbsp&nbsp&nbsp&nbsp&nbsp&nbspPopulate the database with recipes and ingredients from APIs. 
-    &nbsp&nbsp&nbsp&nbsp&nbsp&nbspUse descriptive pictures and videos to help users understand the final dish.
+        Populate the database with recipes and ingredients from APIs. 
+        Use descriptive pictures and videos to help users understand the final dish.
 
  b) Step-by-step instructions: <br />
         Provide detailed instructions about the recipe along with the exact measurements of ingredients.
 
- c) Filter and search: <br />
+ c) Filter and search:
         Users can search any recipe by its name or the ingredients along with indigenous dishes.
 
-
+</pre>
 
 ## Demo 🛠️
 
