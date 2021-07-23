@@ -19,7 +19,7 @@ A recipe app catering to different cuisines and delicacies will enable various s
  <pre>
  
  a) Display the dishes: 
-        * Populate the database with recipes and ingredients from APIs. 
+        * Populate the screen with recipes and ingredients fetched from APIs. 
         * Descriptive pictures to help users understand the final dish. <br />
 
  b) Step-by-step instructions: 
