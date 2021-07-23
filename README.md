@@ -1,9 +1,9 @@
 <h1 align="center">Swadastic : Recipe App </h1> 
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Android-3DDC84?style=for-the-badge&logo=android&logoColor=white">
+  <img src="https://img.shields.io/badge/uses%20internet-ffbf00?style=for-the-badge&logo=internet&logoColor=white">
   <img src="https://forthebadge.com/images/badges/built-for-android.svg">
-  <img src="https://img.shields.io/badge/Kotlin-0095D5?&style=for-the-badge&logo=kotlin&logoColor=white">
+  <img src="https://img.shields.io/badge/Kotlin-4e1400?&style=for-the-badge&logo=kotlin&logoColor=white">
 </p>
 
 
