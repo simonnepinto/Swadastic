@@ -9,7 +9,7 @@
 
 ## Overview :memo:
 
-Cooking is a process that may be seen by some as an artistic hobby, while for others it may be a part of their daily routine. With the pandemic and lockdown, people were confined to their homes, with no access to food delivery compelling many to learn cooking. <br /> <br />
+Cooking is a process that may be seen by some as an artistic hobby, while for others it may be a part of their daily routine. With the pandemic and lockdown, people were confined to their homes, with no access to food delivery compelling many to learn cooking. <br /> 
 
 A recipe app catering to different cuisines and delicacies will enable various social groups belonging to different ages to try something that is either authentic or a twist to the traditions. Recipes communicate the ingredients and procedures of making a dish, along with educating the user about the combinations of various textures and flavors.
 
@@ -18,20 +18,20 @@ A recipe app catering to different cuisines and delicacies will enable various s
  
  <pre>
  
- a) Display the dishes: <br />
+ a) Display the dishes: 
         * Populate the database with recipes and ingredients from APIs. 
-        * Descriptive pictures to help users understand the final dish.
+        * Descriptive pictures to help users understand the final dish. <br />
 
- b) Step-by-step instructions: <br />
+ b) Step-by-step instructions: 
         * Provide detailed instructions about the recipe along with the exact measurements of ingredients.
-        * Embedded YouTube videos to prompt user engagement.
+        * Embedded YouTube videos to prompt user engagement. <br />
 
- c) Filter and search:  <br />
+ c) Filter and search:  
         * Users can search any recipe by its name or the ingredients.
-        * Display indigenous dishes of various cuisines.
+        * Display indigenous dishes of various cuisines. <br />
         
- d) Share the recipes: <br />
-        * Allows users to share the recipe and video with their friends and family.
+ d) Share the recipes: 
+        * Allows users to share the recipe and video with their friends and family. <br />
 
 </pre>
 
