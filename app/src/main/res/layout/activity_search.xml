@@ -31,6 +31,20 @@
         android:queryHint="Search for recipes"
         app:layout_constraintTop_toBottomOf="@id/mainTitleSearch" />
 
+    <TextView
+        android:id="@+id/failedMessage"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sorry! Recipe Not Found"
+        android:layout_marginTop="6dp"
+        android:fontFamily="@font/gilroy_bold"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/search_bar"
+        app:layout_constraintLeft_toLeftOf="parent" />
+
     <androidx.cardview.widget.CardView
         android:id="@+id/recipeRandomCard"
         android:layout_width="320dp"
@@ -58,7 +72,7 @@
             android:background="#4AF3F1ED"
             android:text="Get a random recipe"
             android:textColor="@color/off_white"
-            android:textSize="22sp" />
+            android:textSize="20sp" />
 
     </androidx.cardview.widget.CardView>
 
@@ -71,7 +85,7 @@
         app:cardCornerRadius="30dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@id/guideline2"
-        app:layout_constraintTop_toBottomOf="@id/search_bar"
+        app:layout_constraintTop_toBottomOf="@id/failedMessage"
         android:onClick="getRecipeByIngredients">
 
         <ImageView
@@ -102,7 +116,7 @@
         app:cardCornerRadius="30dp"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toRightOf="@id/guideline2"
-        app:layout_constraintTop_toBottomOf="@id/search_bar"
+        app:layout_constraintTop_toBottomOf="@id/failedMessage"
         android:onClick="getRecipeByArea">
 
         <ImageView
@@ -128,13 +142,14 @@
     <ListView
         android:id="@+id/recipeList"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="300dp"
         android:visibility="gone"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
         android:background="@color/white"
         app:layout_constraintTop_toBottomOf="@id/search_bar"
         app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginBottom="100dp"
         android:translationZ="100dp"/>
 
     <com.etebarian.meowbottomnavigation.MeowBottomNavigation

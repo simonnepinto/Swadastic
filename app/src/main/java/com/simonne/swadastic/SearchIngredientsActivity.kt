@@ -3,6 +3,7 @@ package com.simonne.swadastic
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.view.ViewGroup
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
@@ -70,6 +71,17 @@ class SearchIngredientsActivity : AppCompatActivity(), SearchIngredientsClicked 
                     ingredientsList.visibility = View.VISIBLE
 
                 ingredientsAdapter.filter.filter(newText)
+                if(ingredientsAdapter.count < 6) {
+                    val params = ingredientsList.layoutParams
+                    params.height = ViewGroup.LayoutParams.WRAP_CONTENT
+                    ingredientsList.layoutParams = params
+                }
+                else{
+                    val params = ingredientsList.layoutParams
+                    params.height = 1000
+                    ingredientsList.layoutParams = params
+                }
+
                 return false
             }
         })

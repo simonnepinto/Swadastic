@@ -1,17 +1,19 @@
 package com.simonne.swadastic
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.view.ViewGroup
 import android.widget.*
-import androidx.cardview.widget.CardView
+import androidx.appcompat.app.AppCompatActivity
 import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation
 import java.util.*
 import kotlin.collections.ArrayList
+import kotlin.math.roundToInt
+
 
 class SearchActivity : AppCompatActivity() {
     lateinit var recipeNames: ArrayList<String>
@@ -22,6 +24,7 @@ class SearchActivity : AppCompatActivity() {
 
         val searchView = findViewById<SearchView>(R.id.search_bar)
         val recipeList = findViewById<ListView>(R.id.recipeList)
+        val failedMessage = findViewById<TextView>(R.id.failedMessage)
 
         recipeNames = getRecipes()
 
@@ -40,24 +43,39 @@ class SearchActivity : AppCompatActivity() {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 searchView.clearFocus()
                 if(recipeNames.contains(query)){
+                    failedMessage.visibility = View.GONE
                     recipeAdapter.filter.filter(query)
                     recipeList.visibility = View.GONE
                     val url = "https://www.themealdb.com/api/json/v1/1/search.php?s=$query"
                     callRecipeActivity(url)
                 }
                 else{
-                    Toast.makeText(this@SearchActivity, "Recipe Not Found", Toast.LENGTH_LONG).show()
+                    failedMessage.visibility = View.VISIBLE
                 }
                 return false
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
+                failedMessage.visibility = View.GONE
                 if(newText.isNullOrEmpty())
                     recipeList.visibility = View.GONE
                 else
                     recipeList.visibility = View.VISIBLE
 
+
                 recipeAdapter.filter.filter(newText)
+                if(recipeAdapter.count < 6) {
+                    val params = recipeList.layoutParams
+                    params.height = ViewGroup.LayoutParams.WRAP_CONTENT
+                    recipeList.layoutParams = params
+                }
+                else{
+                    val params = recipeList.layoutParams
+                    params.height = 1000
+                    recipeList.layoutParams = params
+                }
+
+
                 return false
             }
         })
