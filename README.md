@@ -3,7 +3,7 @@
 <p align="center">
   <img src="https://img.shields.io/badge/uses%20internet-ffbf00?style=for-the-badge&logo=internet&logoColor=white">
   <img src="https://forthebadge.com/images/badges/built-for-android.svg">
-  <img src="https://img.shields.io/badge/Kotlin-4e1400?&style=for-the-badge&logo=kotlin&logoColor=white">
+  <img src="https://img.shields.io/badge/Made%20With%20Kotlin-4e1400?&style=for-the-badge&logo=kotlin&logoColor=white">
 </p>
 
 
