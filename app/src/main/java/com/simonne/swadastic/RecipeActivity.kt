@@ -1,16 +1,23 @@
 package com.simonne.swadastic
 
 import android.content.Intent
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
+import android.widget.ProgressBar
 import android.widget.TextView
+import androidx.core.widget.NestedScrollView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.DataSource
+import com.bumptech.glide.load.engine.GlideException
+import com.bumptech.glide.request.RequestListener
+import com.bumptech.glide.request.target.Target
 import com.google.android.youtube.player.YouTubeBaseActivity
 import com.google.android.youtube.player.YouTubeInitializationResult
 import com.google.android.youtube.player.YouTubePlayer
@@ -82,6 +89,8 @@ class RecipeActivity : YouTubeBaseActivity(), RecipesClicked {
     }
 
     private fun fetchRecipes(id: String){
+        val recipeBody = findViewById<NestedScrollView>(R.id.recipeBody)
+        val progressBar = findViewById<ProgressBar>(R.id.progressBar)
         val recipeName = findViewById<TextView>(R.id.recipeCategoryName)
         val category= findViewById<TextView>(R.id.recipeCuisine)
         val area= findViewById<TextView>(R.id.recipeArea)
@@ -90,6 +99,9 @@ class RecipeActivity : YouTubeBaseActivity(), RecipesClicked {
 
         val url = "https://www.themealdb.com/api/json/v1/1/lookup.php?i=$id"
         val recipesList = ArrayList<Recipes>()
+
+        progressBar.visibility = View.VISIBLE
+        recipeBody.visibility = View.GONE
 
         val jsonObjectRequest = JsonObjectRequest(
             Request.Method.GET, url, null,
@@ -108,9 +120,37 @@ class RecipeActivity : YouTubeBaseActivity(), RecipesClicked {
                 recipeName.text = recipesObject.getString("strMeal")
                 category.text = recipesObject.getString("strCategory")
                 area.text = recipesObject.getString("strArea")
-                Glide.with(this).load(recipesObject.getString("strMealThumb")).into(imageURL)
                 instructions.text = recipesObject.getString("strInstructions")
                 playVideo(recipesObject.getString("strYoutube"))
+
+                recipeBody.visibility = View.VISIBLE
+
+                Glide.with(this).load(recipesObject.getString("strMealThumb")).listener(object: RequestListener<Drawable>{
+
+                    override fun onLoadFailed(
+                        e: GlideException?,
+                        model: Any?,
+                        target: Target<Drawable>?,
+                        isFirstResource: Boolean
+                    ): Boolean {
+                        progressBar.visibility = View.GONE
+                        recipeBody.visibility = View.VISIBLE
+                        return false
+                    }
+
+                    override fun onResourceReady(
+                        resource: Drawable?,
+                        model: Any?,
+                        target: Target<Drawable>?,
+                        dataSource: DataSource?,
+                        isFirstResource: Boolean
+                    ): Boolean {
+                        progressBar.visibility = View.GONE
+                        recipeBody.visibility = View.VISIBLE
+                        return false
+                    }
+
+                }).into(imageURL)
 
                 recipe_name =  recipesObject.getString("strMeal")
                 youtube_link = recipesObject.getString("strYoutube")

@@ -22,13 +22,19 @@
                 android:id="@+id/recipeImage"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="@drawable/splash_bg"
+                android:background="@color/off_white"
                 android:scaleType="centerCrop"
                 app:layout_collapseMode="parallax"
                 app:layout_collapseParallaxMultiplier="0.5"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent">
             </ImageView>
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"/>
 
             <ImageButton
                 android:id="@+id/backButton"
@@ -62,6 +68,7 @@
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.core.widget.NestedScrollView
+        android:id="@+id/recipeBody"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:clipToPadding="false"
@@ -189,9 +196,10 @@
                 </androidx.cardview.widget.CardView>
 
                 <com.google.android.youtube.player.YouTubePlayerView
-                android:id="@+id/youtubeVideo"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                    android:id="@+id/youtubeVideo"
+                    android:layout_marginTop="20dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
 
             </LinearLayout>
         </androidx.cardview.widget.CardView>
