@@ -38,9 +38,7 @@ A recipe app catering to different cuisines and delicacies will enable various s
 ## Demo 🛠️
 
 
-<table align="center" height="50%"  width="50%"><tr><td></td><td>
- 
+<table align="center" height="500px"  width="50%"><tr><td>
 https://user-images.githubusercontent.com/53074235/126779469-7c866c50-1377-4d94-b255-3845e04fe680.mp4
-
-  </td><td></td></tr></table> 
+</td></tr></table> 
 
