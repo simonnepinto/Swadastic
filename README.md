@@ -23,15 +23,15 @@ A recipe app catering to different cuisines and delicacies will enable various s
         * Descriptive pictures to help users understand the final dish. <br />
 
  b) Step-by-step instructions: 
-        * Provide detailed instructions about the recipe along with the exact measurements of ingredients.
+        * Provides detailed instructions about the recipe along with the exact measurements of ingredients.
         * Embedded YouTube videos to prompt user engagement. <br />
 
  c) Filter and search:  
-        * Users can search any recipe by its name or the ingredients.
-        * Display indigenous dishes of various cuisines. <br />
+        * Users can search any recipe by its name or the ingredient.
+        * Displays indigenous dishes of various cuisines. <br />
         
  d) Share the recipes: 
-        * Allows users to share the recipe and video with their friends and family. <br />
+        * Users can share the recipe and video with their friends and family. <br />
 
 </pre>
 
