@@ -9,9 +9,9 @@
 
 ## Overview :memo:
 
-Cooking is a process that may be seen by some as an artistic hobby, while for others it may be a part of their daily routine. With the pandemic and lockdown, people were confined to their homes, with no access to food delivery compelling many to learn cooking. <br />
-A recipe app catering to different cuisines and delicacies will enable various social groups belonging to different ages to try something that is either authentic or a twist to the traditions. <br />
-Recipes communicate the ingredients and procedures of making a dish, along with educating the user about the combinations of various textures and flavors.
+Cooking is a process that may be seen by some as an artistic hobby, while for others it may be a part of their daily routine. With the pandemic and lockdown, people were confined to their homes, with no access to food delivery compelling many to learn cooking. <br /> <br />
+
+A recipe app catering to different cuisines and delicacies will enable various social groups belonging to different ages to try something that is either authentic or a twist to the traditions. Recipes communicate the ingredients and procedures of making a dish, along with educating the user about the combinations of various textures and flavors.
 
 
 ## Features :clipboard:
@@ -29,6 +29,7 @@ Recipes communicate the ingredients and procedures of making a dish, along with 
 
 
 ## Demo 🛠️
+
 
 https://user-images.githubusercontent.com/53074235/126779469-7c866c50-1377-4d94-b255-3845e04fe680.mp4
 
